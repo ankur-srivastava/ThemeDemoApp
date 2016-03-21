@@ -1,4 +1,8 @@
-<resources>>
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Material.Light">
+
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
