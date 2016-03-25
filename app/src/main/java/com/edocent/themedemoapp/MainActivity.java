@@ -47,7 +47,9 @@ public class MainActivity extends Activity {
 
         switch (id){
             case R.id.action_settings:
-                Toast.makeText(this, "Settings Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, DetailActivity.class);
+                startActivity(intent);
+
                 break;
         }
 
