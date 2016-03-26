@@ -3,4 +3,12 @@
     <string name="action_settings">Settings</string>
     <string name="action_share">Share</string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string-array name="listArray">
+        <item>Home</item>
+        <item>Support</item>
+        <item>Contact</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

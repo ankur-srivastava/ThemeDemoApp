@@ -1,21 +1,37 @@
 package com.edocent.themedemoapp;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.ShareActionProvider;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
     ShareActionProvider mShareActionProvider;
+    String[] listArray;
+    ListView drawerListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
+
+        listArray = getResources().getStringArray(R.array.listArray);
+        drawerListView = (ListView)findViewById(R.id.drawerLayoutListId);
+        drawerListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, listArray));
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        TopFragment tf = new TopFragment();
+        ft.replace(R.id.frameLayoutId, tf);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null);
+        ft.commit();
+
     }
 
     @Override
