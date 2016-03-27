@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ShareActionProvider;
@@ -15,6 +18,8 @@ public class MainActivity extends Activity {
     ShareActionProvider mShareActionProvider;
     String[] listArray;
     ListView drawerListView;
+    ActionBarDrawerToggle mActionBarDrawerToggle;
+    DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +28,27 @@ public class MainActivity extends Activity {
 
         listArray = getResources().getStringArray(R.array.listArray);
         drawerListView = (ListView)findViewById(R.id.drawerLayoutListId);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayoutId);
+
         drawerListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, listArray));
+
+        //Create Drawer Toggle
+        mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_drawer, R.string.close_drawer){
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+        mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
+
+        //Enable the drawer to open and close
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
+        //getActionBar().setHomeButtonEnabled(true);
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         TopFragment tf = new TopFragment();
