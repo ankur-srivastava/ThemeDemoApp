@@ -3,6 +3,7 @@ package com.edocent.themedemoapp;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -47,8 +48,8 @@ public class MainActivity extends Activity {
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
 
         //Enable the drawer to open and close
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-        //getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         TopFragment tf = new TopFragment();
@@ -84,6 +85,10 @@ public class MainActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        if(mActionBarDrawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+
         int id = item.getItemId();
 
         switch (id){
@@ -95,5 +100,17 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mActionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
+        mActionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 }
