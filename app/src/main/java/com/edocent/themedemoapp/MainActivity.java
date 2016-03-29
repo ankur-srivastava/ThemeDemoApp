@@ -1,12 +1,15 @@
 package com.edocent.themedemoapp;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,10 +56,24 @@ public class MainActivity extends Activity {
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         TopFragment tf = new TopFragment();
-        ft.replace(R.id.frameLayoutId, tf);
+        //Changed to add Fragment Name
+        //ft.replace(R.id.frameLayoutId, tf);
+        ft.replace(R.id.frameLayoutId, tf, "visible_fragment");
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack(null);
         ft.commit();
+
+        //Add a backStack Listener
+
+        getFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                Fragment currentBackStackFragment = getFragmentManager().findFragmentByTag("visible_fragment");
+                if(currentBackStackFragment instanceof TopFragment){
+                    //Add Code
+                }
+            }
+        });
 
     }
 
